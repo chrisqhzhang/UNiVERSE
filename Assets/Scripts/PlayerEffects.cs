@@ -1,9 +1,10 @@
 using System.Collections;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 public class PlayerEffects : MonoBehaviour
 {
-    [SerializeField] private AudioClip _trashCollectClip;
+    [SerializeField] private AudioClip _collectClip;
 
     private MeshRenderer[] _meshRenderer;
     private Material[] _materials;

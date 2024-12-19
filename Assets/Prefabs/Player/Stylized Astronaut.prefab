@@ -226,7 +226,7 @@ TrailRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_Time: 1
-  m_PreviewTimeScale: 1
+  m_PreviewTimeScale: 0
   m_Parameters:
     serializedVersion: 3
     widthMultiplier: 1.2
@@ -971,8 +971,8 @@ GameObject:
   m_Component:
   - component: {fileID: 5593195909017195343}
   - component: {fileID: 5593195909030888029}
-  - component: {fileID: 5237919840855220307}
-  - component: {fileID: 9071526473488709950}
+  - component: {fileID: 6837896328328904779}
+  - component: {fileID: 566907443990858902}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -991,7 +991,7 @@ Transform:
   m_LocalRotation: {x: -0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0.05378515, y: 1.144495, z: -0.31659797}
   m_LocalScale: {x: 1000, y: 1000, z: 1000}
-  m_ConstrainProportionsScale: 0
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 5593195909017195379}
   m_LocalEulerAnglesHint: {x: -90, y: 0, z: 0}
@@ -1020,7 +1020,7 @@ SkinnedMeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 0a4e82e791f680e408654027a1a39f09, type: 2}
   - {fileID: 2100000, guid: 06eb4e637b7ef614e9265f48c542664b, type: 2}
-  - {fileID: 2100000, guid: d2c8f925eb40c4748811efdd803f25c6, type: 2}
+  - {fileID: 2100000, guid: f1e28291c03feaf42981ef3a6ab42799, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1068,7 +1068,7 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.000008470728, y: 0.0011934813, z: -0.00022597198}
     m_Extent: {x: 0.0022412613, y: 0.0028217856, z: 0.001599066}
   m_DirtyAABB: 0
---- !u!33 &5237919840855220307
+--- !u!33 &6837896328328904779
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1076,7 +1076,7 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5593195909017292591}
   m_Mesh: {fileID: 4300000, guid: 02dd6406ed1ebc248b2fafd0485e0de9, type: 3}
---- !u!114 &9071526473488709950
+--- !u!114 &566907443990858902
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1088,7 +1088,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5fff89cdfbbcaa24cbae8518c257b75a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _quality: 0.5
+  _quality: 0.8
 --- !u!1 &5593195909017292593
 GameObject:
   m_ObjectHideFlags: 0
@@ -1645,9 +1645,9 @@ GameObject:
   - component: {fileID: 5593195909026790557}
   - component: {fileID: 5593195910366287653}
   - component: {fileID: 6013250191903299845}
+  - component: {fileID: 1655640356167463876}
   - component: {fileID: 3553660983007915720}
   - component: {fileID: 9064701688437886016}
-  - component: {fileID: 1655640356167463876}
   m_Layer: 6
   m_Name: Stylized Astronaut
   m_TagString: Player
@@ -1746,6 +1746,29 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!136 &1655640356167463876
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5593195909017292627}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Radius: 0.5
+  m_Height: 2.3712997
+  m_Direction: 1
+  m_Center: {x: 0, y: 1.1517124, z: 0}
 --- !u!114 &3553660983007915720
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -1774,29 +1797,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _trashCollectClip: {fileID: 0}
---- !u!136 &1655640356167463876
-CapsuleCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5593195909017292627}
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_IsTrigger: 0
-  m_ProvidesContacts: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Radius: 0.5
-  m_Height: 2.3712997
-  m_Direction: 1
-  m_Center: {x: 0, y: 1.1517124, z: 0}
 --- !u!1 &5593195909017292629
 GameObject:
   m_ObjectHideFlags: 0
@@ -2399,7 +2399,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5797428246745224015, guid: 24fa55c4f1386e04ea2800527f88c4e1, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5800350169276503837, guid: 24fa55c4f1386e04ea2800527f88c4e1, type: 3}
       propertyPath: m_RootOrder

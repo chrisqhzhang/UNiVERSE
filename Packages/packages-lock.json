@@ -1,10 +1,11 @@
 {
   "dependencies": {
     "com.febucci.custom-hierarchy": {
-      "version": "file:../unitypackage-custom-hierarchy-main",
+      "version": "https://github.com/febucci/unitypackage-custom-hierarchy.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "845f7521c4695bc30d9efe0c3168b616cc51454a"
     },
     "com.unity.adaptiveperformance": {
       "version": "5.1.0",
@@ -12,6 +13,15 @@
       "source": "registry",
       "dependencies": {
         "com.unity.profiling.core": "1.0.2"
+      },
+      "url": "https://packages.unity.com"
+    },
+    "com.unity.adaptiveperformance.google.android": {
+      "version": "1.3.1",
+      "depth": 0,
+      "source": "registry",
+      "dependencies": {
+        "com.unity.adaptiveperformance": "5.1.0"
       },
       "url": "https://packages.unity.com"
     },
@@ -274,6 +284,13 @@
         "com.unity.modules.jsonserialize": "1.0.0"
       },
       "url": "https://packages.unity.com"
+    },
+    "com.whinarn.unitymeshsimplifier": {
+      "version": "https://github.com/Whinarn/UnityMeshSimplifier.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "d741912bfeaad8da4fe0f258f4f3eefe1fe7b3f3"
     },
     "com.unity.modules.accessibility": {
       "version": "1.0.0",

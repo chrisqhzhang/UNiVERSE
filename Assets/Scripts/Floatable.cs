@@ -13,16 +13,18 @@ public class Floatable : MonoBehaviour
     [SerializeField] private float _waveDrag = 0.99f;
 
     [SerializeField] private float _waveAngularDrag = 0.5f;
-    
-    private Vector3 _gravity = new Vector3(0, -9.81f, 0);
-    
-    [SerializeField] private Transform _rotation;
 
     private TimeManager _timeManager;
     
-    private void Awake()
+    private void Start()
     {
-        rb = GetComponentInChildren<Rigidbody>();
+        rb = GetComponent<Rigidbody>();
+        
+        if (rb == null)
+        {
+            rb = GetComponentInChildren<Rigidbody>();
+        }
+        else gameObject.AddComponent<Rigidbody>();
     }
 
     private void FixedUpdate()
@@ -32,7 +34,7 @@ public class Floatable : MonoBehaviour
     
     private void FloatObject()
     {
-        rb.AddForceAtPosition(_gravity / _floaters, transform.position, ForceMode.Acceleration);
+        rb.AddForceAtPosition(Physics.gravity / _floaters, this.gameObject.transform.position, ForceMode.Acceleration);
         
         // float waveHeight = WaveManager.instance.GetWaveHeight(transform.position.x);
         
@@ -46,6 +48,6 @@ public class Floatable : MonoBehaviour
         rb.AddTorque(displacementMultiplier * rb.linearVelocity * _waveAngularDrag * Time.fixedDeltaTime,
             ForceMode.VelocityChange);
         
-        // _rotation.transform.localRotation = Quaternion.Euler(new Vector3(0f, _timeManager.timeOfDay * 360f, 0f));
+        // transform.rotation = Quaternion.Euler(new Vector3(0f, _timeManager.timeOfDay * 360f, 0f));
     }
 }

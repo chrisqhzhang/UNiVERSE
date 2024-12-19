@@ -1,9 +1,15 @@
 using System;
 using UnityEngine;
+using UnityEngine.InputSystem;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
 {
+    private Vector2 _moveDirection;
+    private Vector3 _movement;
+
+    [SerializeField] private InputActionReference moveActionToUse;
+    
     private float _currentHealth;
     private float _currentSpeed;
     private int _currentCurrency;
@@ -28,7 +34,7 @@ public class PlayerController : MonoBehaviour
     [Tooltip("How much the throttle ramps up or down.")]
     [SerializeField] public float speedIncrement = 0.1f;
     [Tooltip("Maximum engine thrust when at 100% throttle.")]
-    [SerializeField] public float responsiveness = 1f;
+    [SerializeField] public float responsiveness = 1.0f;
     
     private float roll;
     private float pitch;
@@ -39,7 +45,7 @@ public class PlayerController : MonoBehaviour
     
     private float resoponseModifier
     {
-        get { return (rb.mass / 10f) * responsiveness; }
+        get { return (rb.mass / 10.0f) * responsiveness; }
     }
     
     private void Awake()
@@ -66,17 +72,47 @@ public class PlayerController : MonoBehaviour
     
     private void Update()
     {
-        InputHandler();
+        // InputHandler();
+        
+        _moveDirection = moveActionToUse.action.ReadValue<Vector2>();
+        print(_moveDirection);
+        
+        /*groundedPlayer = controller.isGrounded;
+        if (groundedPlayer && playerVelocity.y < 0)
+        {
+            playerVelocity.y = 0f;
+        }
+
+        Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+        controller.Move(move * Time.deltaTime * playerSpeed);
+
+        if (move != Vector3.zero)
+        {
+            gameObject.transform.forward = move;
+        }
+
+        // Makes the player jump
+        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        {
+            playerVelocity.y += Mathf.Sqrt(jumpHeight * -2.0f * gravityValue);
+        }
+
+        playerVelocity.y += gravityValue * Time.deltaTime;
+        controller.Move(playerVelocity * Time.deltaTime);*/
     }
     
     private void FixedUpdate()
     {
-        ForceHandler();
+        MobileInputHandler();
+        
+        // ForceHandler();
+        
         AnimationHandler();
     }
     
     private void InputHandler()
     {
+        
         // Set rotational values from our axis inputs
         roll = Input.GetAxis("Roll");
         pitch = Input.GetAxis("Pitch");
@@ -91,7 +127,15 @@ public class PlayerController : MonoBehaviour
         // if (jump) _velocity.y += Mathf.Sqrt(jumpHeight * -1.0f * _gravity);
         // _velocity.y += _gravity * Time.deltaTime;
         // controller.Move(_velocity * Time.deltaTime);
+
         
+    }
+
+    private void MobileInputHandler()
+    {
+        rb.AddForce(transform.forward * _playerStats.MaxSpeed, ForceMode.Acceleration);
+        rb.AddTorque(-transform.right * _moveDirection.y * _currentSpeed);
+        rb.AddTorque(transform.up * _moveDirection.x * _currentSpeed);
     }
     
     private void ForceHandler()
@@ -142,7 +186,7 @@ public class PlayerController : MonoBehaviour
         
         if (other.collider.CompareTag("Collectable"))
         {
-            anim.SetBool(isCollidingHash, true);
+            anim.SetBool(isFlippingHash, true);
         }
         
         if (other.collider.CompareTag("Destructible"))

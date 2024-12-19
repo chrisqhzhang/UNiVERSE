@@ -16,13 +16,23 @@ using System.Collections.Generic;
 /// 
 public class PoissonDiscSampler3D
 {
-	private const int k = 30;  // Maximum number of attempts before marking a sample as inactive.
+	private const int k = 2;  // Maximum number of attempts before marking a sample as inactive.
 	
 	private readonly Vector3 cube;
 	private readonly float radius2;  // radius squared
 	private readonly float cellSize;
 	private Vector3[,,] grid;
-	private List<Vector3> activeSamples = new List<Vector3>();
+	private List<Vector3> activeSamples = new List<Vector3>(); // Chris: Samples position info
+
+	// Chris: Added for procedural generation
+	// public GameObject player = GameObject.FindWithTag("Player");
+	// private int xPlayerLocation => (int)Mathf.Floor(player.transform.position.x);
+	// private int yPlayerLocation => (int)Mathf.Floor(player.transform.position.y);
+	// private int zPlayerLocation => (int)Mathf.Floor(player.transform.position.z);
+	// private Vector3 playerPosition => player.transform.position;
+	// private int blockSize; // Chris: For infinite terrain
+	// private float gridOffset = 2f; // Chris: For infinite terrain
+	// Chris: width, height, depth => width * offset; grid = Abs(width) / cellsize
 	
 	/// Create a sampler with the following parameters:
 	///
@@ -35,20 +45,25 @@ public class PoissonDiscSampler3D
 		cube = new Vector3(width, height, depth);
 		radius2  = radius * radius;
 		cellSize = radius / Mathf.Sqrt (3);
-		grid = new Vector3[Mathf.CeilToInt (width /cellSize),
-		                   Mathf.CeilToInt (height/cellSize),
-		                   Mathf.CeilToInt (depth /cellSize)];
-		Debug.Log (grid.GetLength(0));
-		Debug.Log (grid.GetLength(1));
-		Debug.Log (grid.GetLength(2));
+		grid = new Vector3[Mathf.CeilToInt (width / cellSize),
+		                   Mathf.CeilToInt (height / cellSize),
+		                   Mathf.CeilToInt (depth / cellSize)];
+		
+		// Debug.Log ($"Grid.X {grid.GetLength(0)}");
+		// Debug.Log ($"Grid.Y {grid.GetLength(1)}");
+		// Debug.Log ($"Grid.Z {grid.GetLength(2)}");
 	}
 	
 	/// Return a lazy sequence of samples. You typically want to call this in a foreach loop, like so:
 	///   foreach (Vector3 sample in sampler.Samples()) { ... }
-	public IEnumerable<Vector3> Samples()
+	public IEnumerable<Vector3> Samples()  // Chris: Added spawnNumber
 	{
 		// First sample is chosen randomly
 		yield return AddSample(new Vector3(Random.value * cube.x, Random.value * cube.y, Random.value * cube.z));
+		
+		// yield return AddSample(new Vector3(Random.value * (cube.x + xPlayerLocation), 
+		// 	Random.value * (cube.y + yPlayerLocation), 
+		// 	Random.value * (cube.z + zPlayerLocation))); // Chris: Added for procedural generation
 		
 		while (activeSamples.Count > 0) {
 			
@@ -64,7 +79,7 @@ public class PoissonDiscSampler3D
 				Vector3 candidate = GenerateRandomPointAround (sample, Random.value * 3 * radius2 + radius2);
 
 				// Accept candidates if it's inside the rect and farther than 2 * radius to any existing sample.
-				if (IsContains (candidate, cube) &&
+				if (IsContains (candidate, cube) && // Chris: cube => cube + playerLocation
 					IsFarEnough(candidate)) {
 					found = true;
 					yield return AddSample(candidate);
@@ -81,6 +96,14 @@ public class PoissonDiscSampler3D
 	}
 
 	private bool IsContains (Vector3 v, Vector3 area) {
+		// if (v.x >= area.x / 2 - xPlayerLocation && v.x < area.x / 2 + xPlayerLocation &&
+		//     v.y >= area.y / 2 - yPlayerLocation && v.y < area.y / 2 + yPlayerLocation &&
+		//     v.z >= area.z / 2 - zPlayerLocation && v.z < area.z / 2 + zPlayerLocation) {
+		// 	return true;
+		// } else {
+		// 	return false;
+		// }
+		
 		if (v.x >= 0 && v.x < area.x &&
 		    v.y >= 0 && v.y < area.y &&
 		    v.z >= 0 && v.z < area.z) {

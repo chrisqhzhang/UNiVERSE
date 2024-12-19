@@ -9,6 +9,7 @@ TagManager:
   - Mobile
   - Immobile
   - VFX
+  - SFX
   layers:
   - Default
   - TransparentFX
