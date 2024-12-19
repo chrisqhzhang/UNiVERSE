@@ -1,5 +1,5 @@
 # ♥ UNiVERSE ♥
-An opuscule about a chill floating journey in a wild dreaming space.
+An opuscule about a chill drifting journey in a wild dreaming space.
 
 Solo game design & dev.
 
