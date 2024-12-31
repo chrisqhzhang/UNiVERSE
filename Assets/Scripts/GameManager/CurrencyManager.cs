@@ -22,6 +22,6 @@ public class CurrencyManager : MonoBehaviour
     {
         CurrentCurrency += amount;
 
-        HUDManager.instance.UpdateTextCollectable(CurrentCurrency);
+        UIManager.instance.UpdateTextCollectable(CurrentCurrency);
     }
 }

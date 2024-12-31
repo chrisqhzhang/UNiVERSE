@@ -67,13 +67,13 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _DayTime: 0.10737368
+    - _DayTime: 0.22533603
     - _HorizontalContrast: 3
     - _HorizontalOffset: 0.55
     - _QueueControl: 0
     - _QueueOffset: 0
     - _StarDensity: 500
-    - _StarIntencity: 9.426263
+    - _StarIntencity: 8.246639
     - _StarSize: 2.5
     - _StarTiling: 6.07
     m_Colors:

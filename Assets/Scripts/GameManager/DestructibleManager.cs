@@ -22,6 +22,6 @@ public class DestructibleManager : MonoBehaviour
     {
         CurrentRecord += amount;
 
-        HUDManager.instance.UpdateTextDestructible(CurrentRecord);
+        UIManager.instance.UpdateTextDestructible(CurrentRecord);
     }
 }

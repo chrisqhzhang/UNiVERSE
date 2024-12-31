@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Playables;
 using UnityEngine.Serialization;
 
 public class PlayerController : MonoBehaviour
@@ -187,11 +188,15 @@ public class PlayerController : MonoBehaviour
         if (other.collider.CompareTag("Collectable"))
         {
             anim.SetBool(isFlippingHash, true);
+
+            FindObjectOfType<AudioManager>().Play("Collect");
         }
         
         if (other.collider.CompareTag("Destructible"))
         {
             anim.SetBool(isCollidingHash, true);
+            
+            FindObjectOfType<AudioManager>().Play("Destruct");
         }
         
         if (other.collider.CompareTag("Mobile"))
